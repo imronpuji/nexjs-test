@@ -39,7 +39,7 @@ const Course = ({data, page}) => {
 				{
 					data.map(val => {
 						return (
-							<Card style="w-1/3 w-72 shadow-lg rounded border hover:mouse-cursor hover:shadow-xl" onClick={()=>handleDetail(val.id)}>
+							<Card key={val.id} style="w-1/3 w-72 shadow-lg rounded border hover:mouse-cursor hover:shadow-xl" onClick={()=>handleDetail(val.id)}>
 								<CardHeader url={val.program_thumbnail_url}/>
 								<Badge  title={val.type} style=" p-2 bg-blue-500 rounded text-white font-lg m-3"/>
 								<CardBody title={val.summary} price={val.price} provider={val.provider_name}/>

@@ -1,6 +1,18 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Link from 'next/link'
+import { Auth } from 'aws-amplify';
+
 function Nav(){
+	const[user, setUser] = useState('')
+	async function getUser(){
+
+		const userSession = await Auth.currentAuthenticatedUser()
+		console.log(userSession.username)
+		setUser(userSession.username)
+	}
+	useEffect(() => {
+		getUser()
+	})
 
 	return (
 			<nav className="bg-blue-500 w-full h-24 fixed top-0 left-0 right-0 m-0 flex z-40">
@@ -28,6 +40,8 @@ function Nav(){
 	        		<li className="border-2 rounded pl-8 pr-8 pt-2 pb-2 text-base rounded hover:bg-white hover:text-black ">
 	        			<Link href="/login">Login</Link>
 	        		</li>
+	        		<li>{user}</li>
+	        		
 	        	</ul>
 	      	</nav>
 		)
