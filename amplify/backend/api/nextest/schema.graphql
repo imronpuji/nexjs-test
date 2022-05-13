@@ -1,0 +1,11 @@
+type UntitledModel @model @searchable @auth(rules: [{allow: public}]) {
+  id: ID!
+  type: String
+  provider_name: String
+  price: Int
+  training_duration: Int
+  level: String
+  program_thumbnail_url: String
+  is_publish: Boolean
+  summary: String
+}
