@@ -24,7 +24,7 @@ function SignupForm(){
 	return (
 			<div className="h-full flex justify-center flex-col p-2 ">
 				<span className="text-xl font-bold">Sign Up</span>
-				<span className="text-sm text-gray-400">it's free</span>
+				<span className="text-sm text-gray-400">it&apos;s free</span>
 				<input onChange={({target}) => setUsername(target.value)} className="mt-4 p-2 border rounded" placeholder="Username"/>
 				<input onChange={({target}) => setEmail(target.value)} className="mt-4 p-2 border rounded" placeholder="Email"/>
 				<input onChange={({target}) => setPassword(target.value)} className="mt-4 p-2 border rounded" placeholder="Password"/>

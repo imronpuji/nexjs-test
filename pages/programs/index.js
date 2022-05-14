@@ -15,7 +15,7 @@ import Image from 'next/image'
 import Toogle from '/components/Toogle'
 import Sort from '/components/Sort'
 import Spinner from '/components/Spinner'
-const Course = ({data, page, count}) => {
+const Course = ({data, page, count, inHouse}) => {
 	const [keyword, setkeyword] = useState('')
 	const [publish, setPublish] = useState('')
 
@@ -28,6 +28,9 @@ const Course = ({data, page, count}) => {
 
 	const search = () => {
 		router.query.keyword = keyword
+		if(keyword.length == 0){
+			router.query.keyword = []
+		}
 		router.push(router)
 	}
 
@@ -64,7 +67,7 @@ const Course = ({data, page, count}) => {
 		<>
 			<FilterWrapper>
 				<Search onChange={onChangeSearch} onClick={search}/>
-				<Toogle onClick={handleInHouse} name="inhouse" title="in House Program" for="program" id="program"/>
+				<Toogle status={inHouse} onClick={handleInHouse} name="inhouse" title="in House Program" for="program" id="program"/>
 			</FilterWrapper>
 			<FilterWrapper>
 				<Sort onChange={sortingPrice}/>
@@ -148,7 +151,7 @@ export const getServerSideProps =  WithAuth(async ({query}) =>  {
 	}
 	console.log(makeCountAsArray)
 	return {
-		props:{data, page:page  ? page:null, count:makeCountAsArray}
+		props:{data, page:page  ? page:null, count:makeCountAsArray, inHouse:inHouse ? true : false}
 	}
 
 })

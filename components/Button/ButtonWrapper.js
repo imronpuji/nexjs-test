@@ -1,12 +1,12 @@
 import React, {useState} from 'react'
 import {useRouter} from 'next/router'
-function buttonWrapper (Components) {
-	const buttonComponent = (props) => {
+function ButtonWrapper (Components) {
+	const ButtonComponent = (props) => {
 		const router = useRouter()
+		const [loading, setLoading] = useState(false)
 		router.events?.on('routeChangeStart', url => {
 			setLoading(false)
 		});
-		const [loading, setLoading] = useState(false)
 		const handleChange = () => {
 			if(props.loader){
 				setLoading(!loading)
@@ -24,7 +24,7 @@ function buttonWrapper (Components) {
 
 	}
 
-	return buttonComponent
+	return ButtonComponent
 }
 
-export default buttonWrapper
+export default ButtonWrapper
