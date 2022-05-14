@@ -38,11 +38,11 @@ function Pagination(props){
 						props.totalPage.map((val, index) => {
 							if(props.currentPage == val){
 								return (
-									<Button onClick={()=>onMovingPage(val)} style="text-white p-2 m-3 bg-blue-500 rounded-full w-10 h-10" title={val}/>
+									<Button key={index} onClick={()=>onMovingPage(val)} style="text-white p-2 m-3 bg-blue-500 rounded-full w-10 h-10" title={val}/>
 								)	
 							} else {
 								return (
-									<Button onClick={()=>onMovingPage(val)} style="p-2 m-3" title={val}/>
+									<Button key={index} onClick={()=>onMovingPage(val)} style="p-2 m-3" title={val}/>
 								)
 							}
 						})

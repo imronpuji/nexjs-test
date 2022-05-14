@@ -20,7 +20,7 @@ const Sort = (props) => {
 							ease-in-out
 							m-0
 							focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none">
-							<option disabled selected>Filter Price</option>
+							<option disabled>Filter Price</option>
 							<option value="ASCENDING">Price Low to High</option>
 							<option value="DESCENDING">Price High to Low</option>
 					    </select>
