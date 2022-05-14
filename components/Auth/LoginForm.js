@@ -12,6 +12,7 @@ function LoginForm(){
 	        router.push('/programs')
 	        console.log(user)
 	    } catch (error) {
+	    	alert(error)
 	    	router.push('/login')
 	        console.log('error signing in', error);
 	    }
