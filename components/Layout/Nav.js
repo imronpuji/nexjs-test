@@ -49,9 +49,14 @@ function Nav(){
 				        			<Button loader={true} onClick={() => signOut()} title="Logout"/>
 				        		</li>
 	        				) : (
-				        		<li className="border-2 rounded pl-8 pr-8 pt-2 pb-2 text-base rounded hover:bg-white hover:text-black ">
-				        			<Link href="/login">Login</Link>
-				        		</li>
+		        				<>
+					        		<li className="border-2 rounded pl-8 pr-8 pt-2 pb-2 text-base rounded hover:bg-white hover:text-black ">
+					        			<Link href="/login">Login</Link>
+					        		</li>
+					        		<li className="border-2 rounded pl-8 pr-8 pt-2 pb-2 text-base rounded hover:bg-white hover:text-black ">
+					        			<Link href="/signup">Join</Link>
+					        		</li>
+					        	</>
 	        				)
 	        		}
 	        		
