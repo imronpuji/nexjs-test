@@ -10,7 +10,9 @@ import CardBody from '/components/Card/CardBody'
 import CardHeader from '/components/Card/CardHeader'
 import {useRouter} from 'next/router'
 import Pagination from '/components/Pagination'
-const Course = ({data, page}) => {
+import WithAuth from '/components/Auth/withAuth'
+import Image from 'next/image'
+const Course = ({data, page, count}) => {
 		const [keyword, setkeyword] = useState('')
 		const [publish, setPublish] = useState('')
 
@@ -39,33 +41,50 @@ const Course = ({data, page}) => {
 				{
 					data.map(val => {
 						return (
-							<Card key={val.id} style="w-1/3 w-72 shadow-lg rounded border hover:mouse-cursor hover:shadow-xl" onClick={()=>handleDetail(val.id)}>
+							<Card key={val.id} style=" shadow-lg rounded border hover:cursor-pointer hover:shadow-xl" onClick={()=>handleDetail(val.id)}>
 								<CardHeader url={val.program_thumbnail_url}/>
 								<Badge  title={val.type} style=" p-2 bg-blue-500 rounded text-white font-lg m-3"/>
-								<CardBody title={val.summary} price={val.price} provider={val.provider_name}/>
+								<CardBody title={val.title} price={val.price} provider={val.provider_name}/>
 							</Card>
 						)
 					})	
 				}
 				</CardWrapper>
-				<Pagination currentPage={page} totalPage={[1,2,3,4,5]}/>
+				{
+					data.length==0 ? (
+						<Image 
+
+							src="https://res.cloudinary.com/dxczqkbzu/image/upload/v1652445254/undraw_Clean_up_re_504g_keijje.png"
+							width="400"
+							height="300"
+						    alt="Picture of the author"
+						/>
+						) : (
+							<Pagination currentPage={page} totalPage={count}/>
+						)
+				}
 				
 			</>
 			)
 	}
 
-export async function getServerSideProps({query}) {
+export const getServerSideProps =  WithAuth(async ({query}) =>  {
 	const {keyword, page} = query
 	let data;
+	let count;
+
 	if(keyword){
-		console.log(keyword)
-		data = await DataStore.query(UntitledModel, c => c.summary('contains', keyword),  {
+		count = data = await DataStore.query(UntitledModel, c => c.title('contains', keyword))
+		count = Math.ceil(count.length / 5)
+		data = await DataStore.query(UntitledModel, c => c.title('contains', keyword),  {
 			page:parseInt(query.page - 1),
 			limit:5,
 
 		})
 	} else {
-		data = await DataStore.query(UntitledModel, Predicates.ALL,  {
+		count = data = await DataStore.query(UntitledModel)
+		count = Math.ceil(count.length / 5)
+		data = await  DataStore.query(UntitledModel, Predicates.ALL,  {
 			page:query?.page ? parseInt(query.page - 1) : 0 ,
 			limit:5,
 
@@ -73,10 +92,16 @@ export async function getServerSideProps({query}) {
 	}
 
 	data = JSON.parse(JSON.stringify(data))
+
+	const makeCountAsArray = []
+	for(let i=1;i<=count;i++){
+		makeCountAsArray.push(i)
+	}
+	console.log(makeCountAsArray)
 	return {
-		props:{data, page:page  ? page:null}
+		props:{data, page:page  ? page:null, count:makeCountAsArray}
 	}
 
-}
+})
 
 export default Course

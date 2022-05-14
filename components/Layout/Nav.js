@@ -1,14 +1,23 @@
 import React, {useState, useEffect} from 'react'
 import Link from 'next/link'
+import {useRouter} from 'next/router'
 import { Auth } from 'aws-amplify';
-
+import Button from '/components/Button'
 function Nav(){
 	const[user, setUser] = useState('')
+	const router = useRouter()
 	async function getUser(){
-
-		const userSession = await Auth.currentAuthenticatedUser()
-		console.log(userSession.username)
-		setUser(userSession.username)
+		await Auth.currentAuthenticatedUser().then((res) => {
+			const username = res.username 
+			setUser(username)
+		}).catch(() => {
+			setUser(false)
+		})
+	}
+	async function signOut(){
+		setUser(false)
+		await Auth.signOut()
+		await router.push('/login')
 	}
 	useEffect(() => {
 		getUser()
@@ -29,18 +38,22 @@ function Nav(){
 	        	</ul>
 	        	<ul className="flex-1 text-white w-32 flex justify-evenly items-center">
 	        		<li className="pl-8 pr-8 pt-2 pb-2 text-base rounded hover:bg-white hover:text-black ">
-	        			<Link href="/login">Categorize</Link>
-	        		</li>
-	        		<li className="pl-8 pr-8 pt-2 pb-2 text-base rounded hover:bg-white hover:text-black ">
 	        			<Link href="/programs">Programs</Link>
 	        		</li>
-	        		<li className="pl-8 pr-8 pt-2 pb-2 text-base rounded hover:bg-white hover:text-black ">
-	        			<Link href="/blog">Blog</Link>
-	        		</li>
-	        		<li className="border-2 rounded pl-8 pr-8 pt-2 pb-2 text-base rounded hover:bg-white hover:text-black ">
-	        			<Link href="/login">Login</Link>
-	        		</li>
-	        		<li>{user}</li>
+	        		{
+	        			user && (<li>{user}</li>)
+	        		}
+	        		{
+	        			user ? (
+				        		<li className="border-2 rounded pl-8 pr-8 pt-2 pb-2 text-base rounded hover:bg-white hover:text-black ">
+				        			<Button loader={true} onClick={() => signOut()} title="Logout"/>
+				        		</li>
+	        				) : (
+				        		<li className="border-2 rounded pl-8 pr-8 pt-2 pb-2 text-base rounded hover:bg-white hover:text-black ">
+				        			<Link href="/login">Login</Link>
+				        		</li>
+	        				)
+	        		}
 	        		
 	        	</ul>
 	      	</nav>

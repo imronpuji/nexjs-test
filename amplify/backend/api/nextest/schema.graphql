@@ -1,6 +1,7 @@
 type UntitledModel @model @searchable @auth(rules: [{allow: public}]) {
   id: ID!
   type: String
+  title: String
   provider_name: String
   price: Int
   training_duration: Int

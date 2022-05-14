@@ -9,13 +9,27 @@ function Pagination(props){
 		router.push(router)
 	}
 	const nextPage = () => {
-		router.query.page = parseInt(props.currentPage) + 1 
-		router.push(router)	
+		if(!props.currentPage){
+			router.query.page = 1 
+			router.push(router)		
+		} else {
+			if(props.totalPage[props.totalPage.length -1] != props.currentPage && props.totalPage[props.totalPage.length -1] >= props.currentPage){
+				router.query.page = parseInt(props.currentPage) + 1 
+				router.push(router)	
+			}
+		}
 	}
 
 	const prevPage = () => {
-		router.query.page = parseInt(props.currentPage) - 1 
-		router.push(router)	
+		if(!props.currentPage){
+			router.query.page = props.totalPage.length
+			router.push(router)		
+		} else {
+			if(props.totalPage[0] != props.currentPage){
+				router.query.page = parseInt(props.currentPage) - 1 
+				router.push(router)	
+			}
+		}
 	}
 	return (
 			<div className="flex">
@@ -34,7 +48,7 @@ function Pagination(props){
 						})
 					}
 
-				<Button onClick={nextPage} title="Next" style="border-2 p-2 bg-blue-500 text-white rounded ml-3"/>
+				<Button disable={props.totalPage[props.totalPage.length -1] == props.currentPage ? true : false} onClick={nextPage} title="Next" style="border-2 p-2 bg-blue-500 text-white rounded ml-3"/>
 			</div>
 		)
 }

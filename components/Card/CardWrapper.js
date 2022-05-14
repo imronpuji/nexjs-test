@@ -1,7 +1,7 @@
 import React from 'react'
 function CardWrapper(props){
 	return (
-			<div className="w-4/5 mt-3 flex flex-row flex-wrap mb-4 ">
+			<div className=" mt-3 w-3/4 grid grid-cols-3 gap-4 content-start mb-4">
 				{props.children}
 			</div>
 		)

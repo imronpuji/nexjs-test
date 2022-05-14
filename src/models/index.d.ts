@@ -11,6 +11,7 @@ type UntitledModelMetaData = {
 export declare class UntitledModel {
   readonly id: string;
   readonly type?: string | null;
+  readonly title?: string | null;
   readonly provider_name?: string | null;
   readonly price?: number | null;
   readonly training_duration?: number | null;

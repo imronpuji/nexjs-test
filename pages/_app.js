@@ -3,8 +3,8 @@ import React from 'react'
 import Layout from '/components/Layout/Main'
 import Button from '/components/Button'
 import { Amplify } from 'aws-amplify';
-import awsExports from '/src/aws-exports';
-Amplify.configure(awsExports);
+import config from '/src/aws-exports';
+Amplify.configure({...config, ssr:true});
 
 function MyApp({ Component, pageProps }) {
   return (

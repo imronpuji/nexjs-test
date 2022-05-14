@@ -7,18 +7,20 @@ function CardHeader({url}){
 			{
 				url ? (
 					<Image
-						className="h-48 w-full"
+						className="rounded h-48 w-full"
 						src={url}
-						width="500"
-						height="500"
+						width="400"
+						height="300"
 					    alt="Picture of the author"
 					/>
 				)  : 
-					<div>
-						<Card style="w-full h-72" component={
-							<span className="font-xl font-bold">No Picture</span>
-						}/>
-					</div>
+					<Image
+						className="rounded h-48 w-full"
+						src="https://res.cloudinary.com/dxczqkbzu/image/upload/v1652445254/undraw_Clean_up_re_504g_keijje.png"
+						width="400"
+						height="300"
+					    alt="Picture of the author"
+					/>
 			}
 			</div>
 		)

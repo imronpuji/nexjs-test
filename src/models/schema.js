@@ -17,6 +17,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "title": {
+                    "name": "title",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "provider_name": {
                     "name": "provider_name",
                     "isArray": false,
@@ -91,6 +98,10 @@ export const schema = {
                     "properties": {}
                 },
                 {
+                    "type": "searchable",
+                    "properties": {}
+                },
+                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -111,5 +122,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "d13c26c1479a12d92cd76e1923ff25da"
+    "version": "7db76e2090b2882cde1b5911d293f6ba"
 };
