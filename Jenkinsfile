@@ -8,8 +8,7 @@ pipeline {
     stages {
         stage('Build') { 
             steps {
-                sh 'npm install' 
-                sh 'npm build' 
+                sh 'docker build -t ./' 
             }
         }
     }
