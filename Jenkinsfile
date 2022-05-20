@@ -1,14 +1,10 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:nextjstest' 
-            args '-p 3000:3000' 
-        }
-    }
+    agent { dockerfile true }
     stages {
-        stage('Build') { 
+        stage('Test') {
             steps {
-                sh 'docker build -t ./' 
+                sh 'node --version'
+                sh 'svn --version'
             }
         }
     }
