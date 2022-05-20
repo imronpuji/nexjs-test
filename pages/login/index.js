@@ -4,7 +4,7 @@ import {withSSRContext} from 'aws-amplify'
 
 const Login = () => (
 		<>
-			<Card style="w-72 h-72 shadow-lg rounded relative top-10 border">
+			<Card style="w-72 h-72 shadow-lg rounded relative top-10 border-2">
 				<LoginForm/>
 			</Card>
 		</>
